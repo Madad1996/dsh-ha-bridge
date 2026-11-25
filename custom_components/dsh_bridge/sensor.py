@@ -97,14 +97,17 @@ class DshStatusSensor(DshEntity, SensorEntity):
         """Expose the last answer, session, presence, and approval settings."""
         data = self.coordinator.data or {}
         approvals = data.get("approvals")
+        session = str(self._status.get("session") or "")
+        if len(session) > 8:
+            session = session[-8:]
         return {
-            "letzte_antwort": self._status.get("detail") or "",
-            "sitzung": self._status.get("session") or "",
-            "offene_freigaben": self._status.get("pending", 0),
-            "aktualisiert": self._status.get("updated_at"),
-            "zuhause": self._presence.get("home"),
-            "sprachfreigabe": (approvals or {}).get("voice") if isinstance(approvals, dict) else None,
-            "ansage_entity": data.get("announce_entity"),
+            "last_answer": self._status.get("detail") or "",
+            "session": session,
+            "open_approvals": self._status.get("pending", 0),
+            "updated_at": self._status.get("updated_at"),
+            "home": self._presence.get("home"),
+            "voice_approval": (approvals or {}).get("voice") if isinstance(approvals, dict) else None,
+            "announce_entity": data.get("announce_entity"),
         }
 
 
