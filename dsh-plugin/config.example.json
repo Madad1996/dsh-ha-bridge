@@ -1,0 +1,21 @@
+{
+  "haUrl": "http://homeassistant.local:8123",
+  "haToken": "HOME_ASSISTANT_LONG_LIVED_TOKEN",
+  "bridgeToken": "SHARED_SECRET_BETWEEN_BOTH_SIDES",
+  "presence": [
+    { "entity_id": "device_tracker.your_phone", "homeStates": ["home"] },
+    { "entity_id": "person.your_name", "homeStates": ["home"] },
+    { "entity_id": "binary_sensor.your_presence_sensor", "homeStates": ["on"], "weak": true }
+  ],
+  "presenceMode": "primary",
+  "announceEntity": "assist_satellite.your_satellite",
+  "requireHome": true,
+  "publishStatus": false,
+  "chatTimeoutMs": 45000,
+  "chatQueueLimit": 3,
+  "agentSessionId": "ha-voice",
+  "agentCwd": "/path/to/working-directory",
+  "voiceApproval": true,
+  "approvalTimeoutSeconds": 30,
+  "maxHistoryChars": 1500
+}

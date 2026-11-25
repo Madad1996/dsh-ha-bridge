@@ -1,0 +1,7 @@
+# Host row of the DSH bridge plugin. Point configPath at a copy of
+# dsh-bridge.example.json with your Home Assistant URL, token, and bridge token.
+- insert:
+    - id: dsh-bridge
+      name: '@local/dsh-bridge'
+      config:
+        configPath: /path/to/config.json

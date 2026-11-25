@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "DSH bridge",
+    "description": "Serves the DSH status snapshot for the Home Assistant integration and asks for permission by voice.",
+    "detail": "docs/DETAIL.md"
+  }
+}

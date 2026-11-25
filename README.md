@@ -17,6 +17,11 @@ DeepSeek Harness (DSH) in Home Assistant. It polls the DSH bridge endpoint
 - Diagnostics download with the token redacted.
 - No changes to conversation agents, pipelines, automations, or scripts.
 
+## Two parts
+
+1. **This integration** (`custom_components/dsh_bridge`) for Home Assistant.
+2. **The bridge plugin** (`dsh-plugin/`) that runs on the DSH host and serves the status endpoint. Install it first; without it the integration has nothing to read.
+
 ## Requirements
 
 - Home Assistant 2025.1 or newer

@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "DSH-Brücke",
+    "description": "Stellt den DSH-Status für die Home-Assistant-Integration bereit und fragt Rechte per Sprache ab.",
+    "detail": "docs/DETAIL.md"
+  }
+}

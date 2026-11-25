@@ -1,0 +1,25 @@
+{
+  "name": "@local/dsh-bridge",
+  "version": "1.1.0",
+  "private": true,
+  "description": "DSH status bridge for Home Assistant: serves the status snapshot the dsh_bridge integration polls and answers permission requests by voice.",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
