@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DeepSeek Harness verbinden",
+        "description": "Adresse (IP oder Hostname) und Brücken-Token der DSH-Installation. Der Token steht in der DSH-Konfiguration unter \"bridgeToken\".",
+        "data": {
+          "host": "Host oder IP",
+          "port": "Port",
+          "token": "Brücken-Token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Token erneuern",
+        "description": "Die Brücke hat den gespeicherten Token abgelehnt. Neuen Brücken-Token eintragen.",
+        "data": {
+          "token": "Brücken-Token"
+        }
+      },
+      "reconfigure": {
+        "title": "Verbindung ändern",
+        "description": "Host, Port oder Token anpassen. Die Entitäten bleiben erhalten.",
+        "data": {
+          "host": "Host oder IP",
+          "port": "Port",
+          "token": "Brücken-Token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Keine Verbindung zum DSH-Statusendpunkt. Läuft DSH und stimmt die Adresse?",
+      "invalid_auth": "Der Brücken-Token wurde abgelehnt."
+    },
+    "abort": {
+      "already_configured": "Diese Brücke ist bereits eingerichtet.",
+      "reauth_successful": "Der Token wurde aktualisiert.",
+      "reauth_entry_missing": "Der Eintrag existiert nicht mehr.",
+      "reconfigure_successful": "Die Verbindung wurde aktualisiert.",
+      "reconfigure_entry_missing": "Der Eintrag existiert nicht mehr."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Abfrageintervall",
+        "data": {
+          "scan_interval": "Sekunden zwischen zwei Abfragen"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "pending_approvals": {
+        "name": "Offene Freigaben"
+      },
+      "last_answer": {
+        "name": "Letzte Antwort"
+      }
+    },
+    "binary_sensor": {
+      "online": {
+        "name": "Verbunden"
+      }
+    }
+  }
+}

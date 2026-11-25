@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect DeepSeek Harness",
+        "description": "Address (IP or hostname) and bridge token of the DSH installation. The token is the \"bridgeToken\" value in the DSH configuration.",
+        "data": {
+          "host": "Host or IP",
+          "port": "Port",
+          "token": "Bridge token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Update token",
+        "description": "The bridge rejected the stored token. Enter a new bridge token.",
+        "data": {
+          "token": "Bridge token"
+        }
+      },
+      "reconfigure": {
+        "title": "Change connection",
+        "description": "Adjust host, port, or token. Entities stay unchanged.",
+        "data": {
+          "host": "Host or IP",
+          "port": "Port",
+          "token": "Bridge token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the DSH status endpoint. Is DSH running and the address correct?",
+      "invalid_auth": "The bridge token was rejected."
+    },
+    "abort": {
+      "already_configured": "This bridge is already configured.",
+      "reauth_successful": "The token was updated.",
+      "reauth_entry_missing": "The entry no longer exists.",
+      "reconfigure_successful": "The connection was updated.",
+      "reconfigure_entry_missing": "The entry no longer exists."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling interval",
+        "data": {
+          "scan_interval": "Seconds between polls"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "pending_approvals": {
+        "name": "Open approvals"
+      },
+      "last_answer": {
+        "name": "Last answer"
+      }
+    },
+    "binary_sensor": {
+      "online": {
+        "name": "Connected"
+      }
+    }
+  }
+}
