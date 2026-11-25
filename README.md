@@ -35,3 +35,7 @@ HACS → Integrations → ⋮ → Custom repositories → this repository, categ
 python3 -m py_compile custom_components/dsh_bridge/*.py
 curl -s -H "Authorization: Bearer $TOKEN" "http://$DSH_HOST:3080/api/ha-voice/status"
 ```
+
+## Credits
+
+Icon: [Material Design Icons](https://materialdesignicons.com/) (Apache-2.0).
