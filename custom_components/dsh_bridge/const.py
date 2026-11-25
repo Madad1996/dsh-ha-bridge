@@ -20,3 +20,5 @@ CONF_SCAN_INTERVAL = "scan_interval"
 STATUS_PATH = "/api/ha-voice/status"
 
 TITLE = "DeepSeek Harness"
+
+STALE_AFTER_MINUTES = 10

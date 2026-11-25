@@ -59,11 +59,23 @@
       },
       "last_answer": {
         "name": "Last answer"
+      },
+      "last_activity": {
+        "name": "Last activity"
+      },
+      "response_time": {
+        "name": "Response time"
       }
     },
     "binary_sensor": {
       "online": {
         "name": "Connected"
+      },
+      "waiting": {
+        "name": "Waiting for approval"
+      },
+      "stale": {
+        "name": "Status stale"
       }
     }
   }

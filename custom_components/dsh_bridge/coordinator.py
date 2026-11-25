@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import time
 from datetime import timedelta
 import logging
 from typing import Any
@@ -45,6 +46,7 @@ class DshCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self.host: str = entry.data[CONF_HOST]
         self.port: int = entry.data[CONF_PORT]
         self.token: str = entry.data[CONF_TOKEN]
+        self.response_ms: int | None = None
 
     @property
     def base_url(self) -> str:
@@ -59,6 +61,7 @@ class DshCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     async def _async_update_data(self) -> dict[str, Any]:
         """Fetch the status snapshot."""
         url = f"{self.base_url}{STATUS_PATH}"
+        started = time.monotonic()
         headers = {"Authorization": f"Bearer {self.token}"}
         try:
             async with asyncio.timeout(REQUEST_TIMEOUT):
@@ -68,6 +71,7 @@ class DshCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 if response.status != 200:
                     raise UpdateFailed(f"Unerwartete Antwort von DSH: HTTP {response.status}")
                 payload = await response.json(content_type=None)
+            self.response_ms = round((time.monotonic() - started) * 1000)
         except asyncio.TimeoutError as err:
             raise UpdateFailed("Zeitüberschreitung beim Abruf des DSH-Status") from err
         except ClientError as err:

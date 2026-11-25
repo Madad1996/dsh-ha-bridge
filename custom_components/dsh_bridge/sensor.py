@@ -4,11 +4,14 @@ from __future__ import annotations
 
 from typing import Any
 
-from homeassistant.components.sensor import SensorEntity, SensorStateClass
+from datetime import datetime
+
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.util import dt as dt_util
 
 from .const import MANUFACTURER, MODEL, NAME
 from .coordinator import DshCoordinator
@@ -20,6 +23,12 @@ STATUS_ICONS = {
 }
 
 MAX_STATE_LENGTH = 250
+
+
+def _parse(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    return dt_util.parse_datetime(value)
 
 
 async def async_setup_entry(
@@ -34,6 +43,8 @@ async def async_setup_entry(
             DshStatusSensor(coordinator, entry),
             DshPendingApprovalsSensor(coordinator, entry),
             DshLastAnswerSensor(coordinator, entry),
+            DshLastActivitySensor(coordinator, entry),
+            DshResponseTimeSensor(coordinator, entry),
         ]
     )
 
@@ -153,3 +164,38 @@ class DshLastAnswerSensor(DshEntity, SensorEntity):
     def extra_state_attributes(self) -> dict[str, Any]:
         """Expose the full text."""
         return {"text": self._status.get("detail") or ""}
+
+
+class DshLastActivitySensor(DshEntity, SensorEntity):
+    """When DSH last reported a change."""
+
+    _attr_translation_key = "last_activity"
+    _attr_device_class = SensorDeviceClass.TIMESTAMP
+    _attr_icon = "mdi:clock-check-outline"
+
+    def __init__(self, coordinator: DshCoordinator, entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, entry, "last_activity")
+
+    @property
+    def native_value(self) -> datetime | None:
+        """Return the timestamp of the last status change."""
+        return _parse(self._status.get("updated_at"))
+
+
+class DshResponseTimeSensor(DshEntity, SensorEntity):
+    """Round-trip time of one status poll."""
+
+    _attr_translation_key = "response_time"
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_native_unit_of_measurement = "ms"
+    _attr_icon = "mdi:speedometer"
+
+    def __init__(self, coordinator: DshCoordinator, entry: ConfigEntry) -> None:
+        """Initialize the sensor."""
+        super().__init__(coordinator, entry, "response_time")
+
+    @property
+    def native_value(self) -> int | None:
+        """Return the measured response time in milliseconds."""
+        return self.coordinator.response_ms
