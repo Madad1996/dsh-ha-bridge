@@ -109,6 +109,9 @@ class DshStaleBinarySensor(CoordinatorEntity[DshCoordinator], BinarySensorEntity
     def is_on(self) -> bool:
         """Return True when the last status update is older than the threshold."""
         status = (self.coordinator.data or {}).get("status") or {}
+        # Only a working DSH can be stuck: an idle one legitimately has no new status.
+        if str(status.get("state")) != "arbeitet":
+            return False
         stamp = status.get("updated_at")
         if not stamp:
             return False

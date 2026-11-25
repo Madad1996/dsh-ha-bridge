@@ -25,7 +25,7 @@ export const name = 'dsh-status'
 const VERSION = '1.1.0'
 
 const DEFAULTS = {
-  haUrl: 'http://192.168.0.155:8123',
+  haUrl: 'http://homeassistant.local:8123',
   haToken: '',
   presence: [
     { entity_id: 'device_tracker.your_phone', homeStates: ['home'] },
